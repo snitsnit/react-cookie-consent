@@ -595,6 +595,16 @@ var CookieConsent = function (_Component) {
     };
 
     _this.handleScroll = _this.handleScroll.bind(_this);
+
+    var _this$props = _this.props,
+        cookieName = _this$props.cookieName,
+        debug = _this$props.debug;
+
+    // if cookie undefined or debug
+
+    if (_jsCookie2.default.get(cookieName) === undefined || debug) {
+      _this.setState({ visible: true });
+    }
     return _this;
   }
 
@@ -605,13 +615,8 @@ var CookieConsent = function (_Component) {
           cookieName = _props.cookieName,
           debug = _props.debug;
 
-      // if cookie undefined or debug
-
-      if (_jsCookie2.default.get(cookieName) === undefined || debug) {
-        this.setState({ visible: true });
-      }
-
       // if acceptOnScroll is set to true and (cookie is undefined or debug is set to true), add a listener.
+
       if (this.props.acceptOnScroll && (_jsCookie2.default.get(cookieName) === undefined || debug)) {
         window.addEventListener("scroll", this.handleScroll, { passive: true });
       }
